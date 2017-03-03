@@ -35,6 +35,8 @@ defmodule Blog.Mixfile do
      {:phoenix_ecto, "~> 3.0"},
      {:postgrex, ">= 0.0.0"},
      {:gettext, "~> 0.11"},
+     {:ja_serializer, "~> 0.11.2"},
+     {:cors_plug, "~> 1.1"},
      {:cowboy, "~> 1.0"}]
   end
 
