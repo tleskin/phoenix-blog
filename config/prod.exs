@@ -13,11 +13,20 @@ use Mix.Config
 # which you typically run after static files are built.
 config :blog, Blog.Endpoint,
   http: [port: {:system, "PORT"}],
-  url: [host: "example.com", port: 80],
-  cache_static_manifest: "priv/static/manifest.json"
+  url: [scheme: "https", host: "limitless-retreat-52342", port: 443],
+  force_ssl: [rewrite_on: [:x_forwarded_proto]],
+  secret_key_base: System.get_env("SECRET_KEY_BASE")
+  ## If using as API don't need next line
+  # cache_static_manifest: "priv/static/manifest.json"
 
 # Do not print debug messages in production
 config :logger, level: :info
+
+config :blog, Blog.Repo,
+  adapter: Ecto.Adapters.Postgres,
+  username: System.get_env("DATABASE_URL"),
+  pool_size: String.to_integer(System.get_env("pool_size") || "10"),
+  ssl: true
 
 # ## SSL Support
 #
@@ -58,4 +67,4 @@ config :logger, level: :info
 
 # Finally import the config/prod.secret.exs
 # which should be versioned separately.
-import_config "prod.secret.exs"
+# import_config "prod.secret.exs"
